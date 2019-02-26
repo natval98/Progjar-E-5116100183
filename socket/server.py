@@ -35,3 +35,6 @@ while True:
 1. Open new Terminal (ubuntu)
 2. write 'telnet localhost 10000'
 3. send message
+4. quit telnet by Ctrl + ]
+5. telnet > quit
+'''
