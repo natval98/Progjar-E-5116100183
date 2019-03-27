@@ -27,21 +27,22 @@ def RetrFile(name, sock):
                 f.write(data)
                 print "{0:.2f}".format((totalRecv/float(filesize))*100)+ "% Done"
 
-            print "Upload Complete!"
+            print "Receiving File From Client Complete!"
             f.close()
         else:
             sock.send("ERR")
 
-    elif os.path.isfile(filename): # list to download
-        sock.send("EXISTS " + str(os.path.getsize(filename)))
+    elif filename[:8] == 'download' and os.path.isfile(filename[9:]): # list to download
+        sock.send("EXISTS " + str(os.path.getsize(filename[9:])))
         userResponse = sock.recv(1024)
         if userResponse[:2] == 'OK':
-            with open(filename, 'rb') as f:
+            with open(filename[9:], 'rb') as f:
                 bytesToSend = f.read(1024)
                 sock.send(bytesToSend)
                 while bytesToSend != "":
                     bytesToSend = f.read(1024)
                     sock.send(bytesToSend)
+            print "Sending File to Client Complete!"
         else:
             sock.send("ERR")
         
