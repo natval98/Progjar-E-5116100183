@@ -1,4 +1,4 @@
-#Tugas-3-Progjar-E
+# Tugas-3-Progjar-E
 
 ```
 Nama: Natasha Valentina
@@ -18,7 +18,9 @@ Cara menjalankan:
 `list [args] contoh: list . atau list images`
 4. Untuk merequest file dari server ke client
 `download [filename] contoh: download birthday.jpg atau download images/pie.jpg`
-nama baru yang ada di client: _client\_[filename]_
+<br />
+nama baru yang ada di client adalah : _client\_[filename]_
 5. Untuk mengupload file dari client ke server
 `upload [filename] contoh: upload pie.jpg`
-nama baru yang ada di server: _server\_[filename]_
+<br />
+nama baru yang ada di server adalah : _server\_[filename]_
