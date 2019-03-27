@@ -7,14 +7,13 @@ def Main():
 	s = socket.socket() # automatically TCP
 	s.connect((host, port))
 
-	filename = raw_input("File? -> ") # diisi 'list' atau filename
-	if filename[:4] == 'list':
+	filename = raw_input("File? -> ")
+	if filename[:4] == 'list': # digunakan untuk list isi directory / folder
 		s.send(filename)
 		userResponse = s.recv(1024)
 		print "directory: " + str(userResponse)
 	
 	else:
-		print "else"
 		s.send(filename)
         data = s.recv(1024)
         if data[:6] == 'EXISTS':
@@ -22,7 +21,8 @@ def Main():
             message = raw_input("File exists, " + str(filesize) +"Bytes, download? (Y/N)? -> ")
             if message == 'Y':
                 s.send("OK")
-                f = open('new_'+filename, 'wb')
+                new_filename = filename.rsplit("/")[-1]
+                f = open('client_'+new_filename, 'wb')
                 data = s.recv(1024)
                 totalRecv = len(data)
                 f.write(data)
@@ -31,7 +31,6 @@ def Main():
                     totalRecv += len(data)
                     f.write(data)
                     print "{0:.2f}".format((totalRecv/float(filesize))*100)+ "% Done"
-                    print "total: " + str(totalRecv)
 
                 print "Download Complete!"
                 f.close()

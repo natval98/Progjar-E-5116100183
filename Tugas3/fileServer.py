@@ -4,17 +4,15 @@ import os
 
 def RetrFile(name, sock):
 	filename = sock.recv(1024)
-	print filename
 
-	if filename[:4] == 'list':
+	if filename[:4] == 'list': # list directory
 		print "print directory list"
 		print "directory path: " + filename[5:]
 		filelist = os.listdir(filename[5:])
 		print filelist
 		sock.send(str(filelist))
-		sock.close()
 
-	elif os.path.isfile(filename):
+	elif os.path.isfile(filename): # list to download image
 		sock.send("EXISTS " + str(os.path.getsize(filename)))
 		userResponse = sock.recv(1024)
 		if userResponse[:2] == 'OK':
@@ -26,10 +24,12 @@ def RetrFile(name, sock):
 					sock.send(bytesToSend)
 		else:
 			sock.send("ERR")
-		sock.close()
+		
 
 	else:
 		print "ERRORR!!!"
+
+	sock.close()
 
 def Main():
 	host = '127.0.0.1'
