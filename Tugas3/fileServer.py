@@ -4,9 +4,13 @@ import os
 
 def RetrFile(name, sock):
 	filename = sock.recv(1024)
+	print filename
 
-	if filename == 'list':
-		filelist = os.listdir('.')
+	if filename[:4] == 'list':
+		print "print directory list"
+		print "directory path: " + filename[5:]
+		filelist = os.listdir(filename[5:])
+		print filelist
 		sock.send(str(filelist))
 		sock.close()
 
