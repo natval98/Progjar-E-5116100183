@@ -15,16 +15,19 @@ def Main():
         print "directory: \n" + str(userResponse)
         
     elif filename[:6] == 'upload': # digunakan untuk upload file
-        print "Uploading File to Server"
         upload_name = filename[7:]
-        s.send("SENDING " + str(os.path.getsize(upload_name)))
-        with open(upload_name, 'rb') as f:
-                bytesToSend = f.read(1024)
-                s.send(bytesToSend)
-                while bytesToSend != "":
+        if os.path.isfile(upload_name):
+            print "Uploading File to Server"
+            s.send("SENDING " + str(os.path.getsize(upload_name)))
+            with open(upload_name, 'rb') as f:
                     bytesToSend = f.read(1024)
                     s.send(bytesToSend)
-        f.close()
+                    while bytesToSend != "":
+                        bytesToSend = f.read(1024)
+                        s.send(bytesToSend)
+            f.close()
+        else:
+            print "File does not exist in client"
 
     elif filename[:8] == 'download': # digunakan untuk download file
         data = s.recv(1024)

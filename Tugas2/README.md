@@ -7,10 +7,9 @@ Kelas : Pemrograman Jaringan E
 ```
 
 Tugas 2:
-Buatlah sebuah UDP picture server yang secara periodik akan mengirimkan gambar-gambar 
-Ke client.
-Sisi server, mengirimkan gambar gambar ke client yang konek di port 9000
-Sisi client, akan mengambil gambar tersebut dan menyimpannya sesuai dengan nama filenya
+- Buatlah sebuah UDP picture server yang secara periodik akan mengirimkan gambar-gambar ke client.
+- Sisi server, mengirimkan gambar gambar ke client yang konek di port 9000
+- Sisi client, akan mengambil gambar tersebut dan menyimpannya sesuai dengan nama filenya
 
 ## Cara Menjalankan
 
