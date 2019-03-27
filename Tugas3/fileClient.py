@@ -1,20 +1,32 @@
 import socket
+import os
 
 def Main():
-	host = '127.0.0.1'
-	port = 9000
+    host = '127.0.0.1'
+    port = 9000
 
-	s = socket.socket() # automatically TCP
-	s.connect((host, port))
+    s = socket.socket() # automatically TCP
+    s.connect((host, port))
 
-	filename = raw_input("File? -> ")
-	if filename[:4] == 'list': # digunakan untuk list isi directory / folder
-		s.send(filename)
-		userResponse = s.recv(1024)
-		print "directory: " + str(userResponse)
-	
-	else:
-		s.send(filename)
+    filename = raw_input("File? -> ")
+    s.send(filename)
+    if filename[:4] == 'list': # digunakan untuk list isi directory / folder
+        userResponse = s.recv(1024)
+        print "directory: \n" + str(userResponse)
+        
+    elif filename[:6] == 'upload':
+        print "Uploading File to Server"
+        upload_name = filename[7:]
+        s.send("SENDING " + str(os.path.getsize(upload_name)))
+        with open(upload_name, 'rb') as f:
+                bytesToSend = f.read(1024)
+                s.send(bytesToSend)
+                while bytesToSend != "":
+                    bytesToSend = f.read(1024)
+                    s.send(bytesToSend)
+        f.close()
+
+    else: # digunakan untuk download file
         data = s.recv(1024)
         if data[:6] == 'EXISTS':
             filesize = long(data[6:])
@@ -36,8 +48,8 @@ def Main():
                 f.close()
         else:
             print "File Does Not Exist!"
-	s.close()
+    s.close()
 
 
 if __name__ == '__main__':
-	Main()
+    Main()
