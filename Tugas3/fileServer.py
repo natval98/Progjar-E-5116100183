@@ -8,6 +8,7 @@ def RetrFile(name, sock):
 	if filename == 'list':
 		filelist = os.listdir('.')
 		sock.send(str(filelist))
+		sock.close()
 
 	elif os.path.isfile(filename):
 		sock.send("EXISTS " + str(os.path.getsize(filename)))
