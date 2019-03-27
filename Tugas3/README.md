@@ -18,9 +18,7 @@ Cara menjalankan:
 `list [args] contoh: list . atau list images`
 4. Untuk merequest file dari server ke client
 `download [filename] contoh: download birthday.jpg atau download images/pie.jpg`
-<br />
 nama baru yang ada di client adalah : _client\_[filename]_
 5. Untuk mengupload file dari client ke server
 `upload [filename] contoh: upload pie.jpg`
-<br />
 nama baru yang ada di server adalah : _server\_[filename]_
